@@ -1,4 +1,4 @@
-using MDD4All.DME.ViewModels.DataManager;
+﻿using MDD4All.DME.ViewModels.DataManager;
 using MDD4All.DME.ViewModels.Editor;
 using MDD4All.DME.ViewModels.Editor.Settings;
 using MDD4All.UI.DataModels.Tree;
@@ -36,6 +36,8 @@ namespace MDD4All.DME.Views.Editor
         #region Lifecycle
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             this.Editor.PropertyChanged += this.OnEditorPropertyChanged;
             EditorSettings.PropertyChanged += OnEditorSettingsPropertyChanged;
             ExplorerSettings.PropertyChanged += OnExplorerSettingsPropertyChanged;
@@ -49,8 +51,10 @@ namespace MDD4All.DME.Views.Editor
             }
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             this.Editor.PropertyChanged -= this.OnEditorPropertyChanged;
             EditorSettings.PropertyChanged -= OnEditorSettingsPropertyChanged;
             ExplorerSettings.PropertyChanged -= OnExplorerSettingsPropertyChanged;

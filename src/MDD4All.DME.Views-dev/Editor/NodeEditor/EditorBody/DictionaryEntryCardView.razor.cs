@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MDD4All.DME.ViewModels.Editor;
 using MDD4All.DME.ViewModels.Editor.Settings;
 using System.ComponentModel;
 
 namespace MDD4All.DME.Views.Editor
 {
-    public partial class DictionaryEntryCardView : ComponentBase, System.IDisposable
+    public partial class DictionaryEntryCardView
     {
         [Parameter]
         public DictionaryEntryViewModel DataContext { get; set; } = null!;
@@ -18,11 +18,15 @@ namespace MDD4All.DME.Views.Editor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Settings.PropertyChanged += OnSettingsPropertyChanged;
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             Settings.PropertyChanged -= OnSettingsPropertyChanged;
         }
 

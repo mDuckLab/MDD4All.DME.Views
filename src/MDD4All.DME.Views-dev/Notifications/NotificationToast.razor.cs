@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MDD4All.DME.Views.Notifications
 {
-    public partial class NotificationToast : IDisposable
+    public partial class NotificationToast
     {
         [Parameter]
         public string Message { get; set; } = "";
@@ -101,8 +101,10 @@ namespace MDD4All.DME.Views.Notifications
             }
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             this.CancelPendingHide();
         }
     }

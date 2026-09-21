@@ -1,5 +1,6 @@
 ﻿@namespace MDD4All.DME.Views.Editor
 @using System.Globalization
+@inherits MDD4All.DME.Views.Localization.LocalizedComponent
 
 <div class="property-row @(IsCompact ? "compact-mode" : "") @(ViewModel.IsReadOnly ? "readonly" : "")"
      title="@(ViewModel.IsReadOnly ? L["Tooltip.ReadOnly"] : null)">

@@ -6,7 +6,7 @@ using MDD4All.DME.ViewModels.Editor.Settings;
 
 namespace MDD4All.DME.Views.Editor
 {
-    public partial class EditorHeaderView : ComponentBase, IDisposable
+    public partial class EditorHeaderView
     {
         [Parameter]
         public EventCallback<EditorAction> OnAction { get; set; }
@@ -19,11 +19,15 @@ namespace MDD4All.DME.Views.Editor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Settings.PropertyChanged += OnSettingsPropertyChanged;
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             Settings.PropertyChanged -= OnSettingsPropertyChanged;
         }
 

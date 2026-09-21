@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MDD4All.DME.ViewModels.Editor;
 using MDD4All.DME.ViewModels.Editor.Settings;
 using System;
@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace MDD4All.DME.Views.Editor
 {
-    public partial class PrimitivePropertyEditorView : IDisposable
+    public partial class PrimitivePropertyEditorView
     {
         #region Parameters
         [Parameter]
@@ -31,6 +31,8 @@ namespace MDD4All.DME.Views.Editor
         #region Lifecycle and Event Subscription
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Settings.PropertyChanged += OnSettingsPropertyChanged;
         }
 
@@ -51,8 +53,10 @@ namespace MDD4All.DME.Views.Editor
             }
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+
             if (this.ViewModel != null)
             {
                 // Unsubscribe to avoid memory leaks

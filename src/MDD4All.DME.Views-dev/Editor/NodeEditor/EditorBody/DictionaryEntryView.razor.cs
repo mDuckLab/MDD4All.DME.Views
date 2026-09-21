@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MDD4All.DME.ViewModels.Editor;
 
 namespace MDD4All.DME.Views.Editor
 {
-    public partial class DictionaryEntryView : ComponentBase
+    public partial class DictionaryEntryView
     {
         [Parameter]
         public DictionaryEntryViewModel DataContext { get; set; } = null!;

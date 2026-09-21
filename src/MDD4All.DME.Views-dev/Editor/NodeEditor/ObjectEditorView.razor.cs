@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MDD4All.DME.ViewModels.Editor;
 using MDD4All.Reflection;
 
 namespace MDD4All.DME.Views.Editor
 {
-    public partial class ObjectEditorView : ComponentBase
+    public partial class ObjectEditorView
     {
         [Parameter] 
         public ObjectEditorViewModel ViewModel { get; set; } = null!;

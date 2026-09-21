@@ -1,7 +1,8 @@
-@namespace MDD4All.DME.Views.Editor
+﻿@namespace MDD4All.DME.Views.Editor
 @using MDD4All.DME.ViewModels.Editor
 @using MDD4All.UI.Buttons
 @using MDD4All.UI.Buttons.Icons
+@inherits MDD4All.DME.Views.Localization.LocalizedComponent
 
 <div class="card-header-grid @(!DataContext.EditorState.ShowExpander ? "no-toggle" : "")" @onclick="@(() => Notify(EditorAction.ToggleExpand))">
     
