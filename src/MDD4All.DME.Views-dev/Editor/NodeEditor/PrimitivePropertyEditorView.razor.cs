@@ -93,6 +93,31 @@ namespace MDD4All.DME.Views.Editor
         #endregion
 
         #region Event Handlers
+        // Which of the three date controls the browser should show.
+        private string DateInputType()
+        {
+            string result = "datetime-local";
+
+            if (this.ViewModel.DataTypeAnnotation == "Date") { result = "date"; }
+            if (this.ViewModel.DataTypeAnnotation == "Time") { result = "time"; }
+
+            return result;
+        }
+
+        // Each of the three wants its own shape, and a value in the wrong one is ignored by the
+        // browser - the field would simply come up empty.
+        private string DateInputValue()
+        {
+            DateTime value = (DateTime)(this.ViewModel.Item ?? DateTime.Now);
+
+            string result = value.ToString("yyyy-MM-ddTHH:mm");
+
+            if (this.ViewModel.DataTypeAnnotation == "Date") { result = value.ToString("yyyy-MM-dd"); }
+            if (this.ViewModel.DataTypeAnnotation == "Time") { result = value.ToString("HH:mm"); }
+
+            return result;
+        }
+
         // Worded on every render, so a language switch reaches the reason as well.
         private string Describe(ValidationAttribute rule)
         {

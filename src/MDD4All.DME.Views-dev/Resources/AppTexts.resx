@@ -256,4 +256,10 @@
   <data name="Validation.Pattern" xml:space="preserve">
     <value>{0} does not have the expected format.</value>
   </data>
+  <data name="Validation.Email" xml:space="preserve">
+    <value>{0} is not a valid e-mail address.</value>
+  </data>
+  <data name="Validation.Url" xml:space="preserve">
+    <value>{0} is not a valid web address.</value>
+  </data>
 </root>

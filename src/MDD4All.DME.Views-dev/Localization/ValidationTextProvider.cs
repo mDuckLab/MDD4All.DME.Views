@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MDD4All.DME.Views.Localization
 {
@@ -45,6 +45,14 @@ namespace MDD4All.DME.Views.Localization
             else if (rule is RequiredAttribute)
             {
                 result = string.Format(_texts["Validation.Required"], fieldName);
+            }
+            else if (rule is EmailAddressAttribute)
+            {
+                result = string.Format(_texts["Validation.Email"], fieldName);
+            }
+            else if (rule is UrlAttribute)
+            {
+                result = string.Format(_texts["Validation.Url"], fieldName);
             }
             else if (rule is RegularExpressionAttribute)
             {

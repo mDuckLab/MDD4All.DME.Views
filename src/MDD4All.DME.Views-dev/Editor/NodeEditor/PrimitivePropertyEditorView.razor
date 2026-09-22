@@ -48,8 +48,11 @@
                     break;
 
                 case TypeCode.DateTime:
-                    <input type="datetime-local" class="form-control"
-                           value="@(((DateTime)(ViewModel.Item ?? DateTime.Now)).ToString("yyyy-MM-ddTHH:mm"))"
+                    @* [DataType] narrows what is asked for: a birthday wants no clock, an alarm
+                       no calendar. Without one, both halves stay on offer. *@
+                    <input type="@DateInputType()"
+                           class="form-control @(_localValueIsValid ? "" : "is-invalid")"
+                           value="@DateInputValue()"
                            @onchange="@(e => OnDateTimeChanged(e.Value?.ToString()))" />
                     break;
 
@@ -90,8 +93,16 @@
 
                 default:
                     @* Use local value for text to handle rejected inputs (snap-back) *@
-                    if (ViewModel.DataTypeAnnotation != null && 
-                        ViewModel.DataTypeAnnotation == "MultilineText")
+                    if (ViewModel.DataTypeAnnotation == "Password")
+                    {
+                        <input type="password"
+                               class="form-control @(_localValueIsValid ? "" : "is-invalid")"
+                               value="@_localValue"
+                               @oninput="OnInput"
+                               @onchange="OnCommit"
+                               @onblur="OnBlur" />
+                    }
+                    else if (ViewModel.DataTypeAnnotation == "MultilineText")
                     {
                         <textarea type="text"
                                   class="form-control multiline @(_localValueIsValid ? "" : "is-invalid")"
