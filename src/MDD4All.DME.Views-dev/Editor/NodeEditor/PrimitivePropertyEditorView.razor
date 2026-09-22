@@ -1,4 +1,5 @@
 ﻿@namespace MDD4All.DME.Views.Editor
+@using System.ComponentModel.DataAnnotations
 @using System.Globalization
 @inherits MDD4All.DME.Views.Localization.LocalizedComponent
 
@@ -56,9 +57,11 @@
                 case TypeCode.Int32:
                 case TypeCode.Int64:
                 case TypeCode.SByte:
-                    <input type="number" step="1" class="form-control"
+                    <input type="number" step="1"
+                           class="form-control @(_localValueIsValid ? "" : "is-invalid")"
                            onkeydown="if(event.key==='.' || event.key===',') event.preventDefault();"
-                           value="@ViewModel.Item"
+                           value="@_localValue"
+                           @oninput="OnInput"
                            @onchange="@(e => OnIntegerChanged(e.Value?.ToString()))" />
                     break;
 
@@ -66,19 +69,23 @@
                 case TypeCode.UInt16:
                 case TypeCode.UInt32:
                 case TypeCode.UInt64:
-                    <input type="number" step="1" min="0" class="form-control"
+                    <input type="number" step="1" min="0"
+                           class="form-control @(_localValueIsValid ? "" : "is-invalid")"
                            pattern="[0-9]*"
                            onkeydown="if(event.key==='.' || event.key===',' || event.key==='-') event.preventDefault();"
-                           value="@ViewModel.Item"
+                           value="@_localValue"
+                           @oninput="OnInput"
                            @onchange="@(e => OnIntegerChanged(e.Value?.ToString()))" />
                     break;
 
                 case TypeCode.Single:
                 case TypeCode.Double:
                 case TypeCode.Decimal:
-                    <input type="number" step="any" class="form-control"
-                           value="@Convert.ToString(ViewModel.Item, CultureInfo.InvariantCulture)"
-                           @onchange="@(e => ViewModel.Item = Convert.ChangeType(e.Value, ViewModel.Type, CultureInfo.InvariantCulture))" />
+                    <input type="number" step="any"
+                           class="form-control @(_localValueIsValid ? "" : "is-invalid")"
+                           value="@_localValue"
+                           @oninput="OnInput"
+                           @onchange="@(e => OnDecimalChanged(e.Value?.ToString()))" />
                     break;
 
                 default:
@@ -87,7 +94,7 @@
                         ViewModel.DataTypeAnnotation == "MultilineText")
                     {
                         <textarea type="text"
-                                  class="form-control multiline"
+                                  class="form-control multiline @(_localValueIsValid ? "" : "is-invalid")"
                                   rows="3"
                                   value="@_localValue"
                                   @oninput="OnInput"
@@ -97,7 +104,7 @@
                     else
                     {
                         <input type="text"
-                               class="form-control"
+                               class="form-control @(_localValueIsValid ? "" : "is-invalid")"
                                value="@_localValue"
                                @oninput="OnInput"
                                @onchange="OnCommit"
@@ -107,5 +114,17 @@
             }
         }
     </fieldset>
+
+    @* One line per rule the last input broke. The field has already snapped back to the value
+       still in the model, so this says why nothing changed. *@
+    @if (ViewModel.BrokenRules.Count > 0)
+    {
+        <ul class="validation-messages">
+            @foreach (ValidationAttribute rule in ViewModel.BrokenRules)
+            {
+                <li>@Describe(rule)</li>
+            }
+        </ul>
+    }
     </div>
 </div>

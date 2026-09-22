@@ -238,4 +238,22 @@
   <data name="Settings.AnnotationNames" xml:space="preserve">
     <value>Beschriftungen aus dem Datenmodell</value>
   </data>
+  <data name="Validation.Range" xml:space="preserve">
+    <value>{0} muss zwischen {1} und {2} liegen.</value>
+  </data>
+  <data name="Validation.StringLength" xml:space="preserve">
+    <value>{0} muss zwischen {1} und {2} Zeichen lang sein.</value>
+  </data>
+  <data name="Validation.MinLength" xml:space="preserve">
+    <value>{0} muss mindestens {1} Zeichen lang sein.</value>
+  </data>
+  <data name="Validation.MaxLength" xml:space="preserve">
+    <value>{0} darf höchstens {1} Zeichen lang sein.</value>
+  </data>
+  <data name="Validation.Required" xml:space="preserve">
+    <value>{0} wird benötigt.</value>
+  </data>
+  <data name="Validation.Pattern" xml:space="preserve">
+    <value>{0} hat nicht das erwartete Format.</value>
+  </data>
 </root>

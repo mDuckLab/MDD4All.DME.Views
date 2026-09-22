@@ -73,3 +73,23 @@
 .property-row.readonly .form-select {
     cursor: not-allowed;
 }
+
+/* Why the last input was turned away. Sits under the field it belongs to, not in the error
+   list at the far end of the window - a typing mistake has a place on screen.
+
+   The border while typing is Bootstrap's own is-invalid, so the two reds match. */
+.validation-messages {
+    list-style: none;
+    margin: 2px 0 0 0;
+    padding: 0;
+    color: #dc3545;
+    font-size: 0.85em;
+}
+
+/* Bootstrap paints its warning mark into the right edge of the field, which is where a number
+   input already keeps its arrows - the two land on top of each other. Widening the padding
+   moves the arrows inwards; the mark stays where Bootstrap puts it, level with the one on a
+   text field beside it. */
+input[type="number"].is-invalid {
+    padding-right: 2.2rem;
+}

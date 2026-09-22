@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MDD4All.DME.ViewModels.Editor;
 using MDD4All.DME.ViewModels.Editor.Settings;
+using MDD4All.DME.Views.Localization;
+using System.ComponentModel.DataAnnotations;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -24,8 +26,15 @@ namespace MDD4All.DME.Views.Editor
         [Inject]
         public EditorAppearanceSettingsViewModel Settings { get; set; } = null!;
 
+        [Inject]
+        public ValidationTextProvider ValidationTexts { get; set; } = null!;
+
         #region Private Fields
         private string? _localValue;
+
+        // Whether what is currently in the field would be taken. Purely a display state - the
+        // model still holds the last value that was.
+        private bool _localValueIsValid = true;
         #endregion
 
         #region Lifecycle and Event Subscription
@@ -67,21 +76,41 @@ namespace MDD4All.DME.Views.Editor
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == nameof(PrimitivePropertyViewModel.BrokenRules))
+            {
+                this.InvokeAsync(this.StateHasChanged);
+            }
+
             if (e.PropertyName == nameof(PrimitivePropertyViewModel.Item))
             {
                 // If the ViewModel item changes (e.g. reverted by the Dictionary logic),
                 // we must update our local shadow variable and refresh the UI.
                 this._localValue = this.ViewModel.Item?.ToString();
+                this._localValueIsValid = true;
                 this.InvokeAsync(this.StateHasChanged);
             }
         }
         #endregion
 
         #region Event Handlers
+        // Worded on every render, so a language switch reaches the reason as well.
+        private string Describe(ValidationAttribute rule)
+        {
+            return ValidationTexts.Describe(rule, this.ViewModel.Title);
+        }
+
         private void OnInput(ChangeEventArgs e)
         {
-            // Only update the local value while the user is typing
+            // The field keeps whatever is being typed - snapping back on every keystroke would
+            // make a number below the lower bound impossible to reach at all.
             this._localValue = e.Value?.ToString();
+
+            // Reddens the field at the first character that breaks a rule. No sentence yet -
+            // that comes when the field is left, along with the value going back.
+            this._localValueIsValid = this.ViewModel.IsValid(this._localValue);
+
+            // Whatever the last attempt was told off for no longer applies.
+            this.ViewModel.ClearBrokenRules();
         }
 
         private void OnCommit(ChangeEventArgs e)
@@ -92,8 +121,10 @@ namespace MDD4All.DME.Views.Editor
             this.ViewModel.Item = newValue;
 
             // Re-sync local value immediately. If the ViewModel rejected the change,
-            // this restores the previous valid state.
+            // this restores the previous valid state - which is valid by definition, so the
+            // field stops being red and the message explains what happened to the input.
             this._localValue = this.ViewModel.Item?.ToString();
+            this._localValueIsValid = true;
         }
 
         private void OnBlur()
@@ -126,6 +157,33 @@ namespace MDD4All.DME.Views.Editor
                     // Value is too large for the target type
                 }
             }
+
+            // Back to whatever the model holds - the entered value if it was taken, the previous
+            // one if a rule turned it away.
+            this._localValue = this.ViewModel.Item?.ToString();
+            this._localValueIsValid = true;
+
+            this.StateHasChanged();
+        }
+
+        private void OnDecimalChanged(string? value)
+        {
+            if (!string.IsNullOrWhiteSpace(value) &&
+                decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal parsed))
+            {
+                try
+                {
+                    this.ViewModel.Item = Convert.ChangeType(parsed, this.ViewModel.Type!,
+                                                             CultureInfo.InvariantCulture);
+                }
+                catch (OverflowException)
+                {
+                    // Value is too large for the target type
+                }
+            }
+
+            this._localValue = this.ViewModel.Item?.ToString();
+            this._localValueIsValid = true;
 
             this.StateHasChanged();
         }
