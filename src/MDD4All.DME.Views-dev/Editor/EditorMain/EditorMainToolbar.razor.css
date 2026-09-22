@@ -5,7 +5,9 @@
     display:flex;
 }
 
+/* The logo is a button like Save beside it, so it takes the same small height. */
 .startButton {
-    width: 50px;
-    height: 40px;
+    height: calc(1.5em + 0.5rem + 2px);
+    width: auto;
+    padding: 2px 6px;
 }

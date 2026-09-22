@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -99,6 +99,9 @@
   </data>
   <data name="Tooltip.Settings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="Tooltip.StartPage" xml:space="preserve">
+    <value>Zurück zur Startseite</value>
   </data>
   <data name="Tooltip.CreateInstance" xml:space="preserve">
     <value>Instanz anlegen</value>
@@ -204,9 +207,6 @@
   </data>
   <data name="Dialog.StillReadable" xml:space="preserve">
     <value>Die Datei bleibt für andere Werkzeuge lesbar, die betroffenen Einträge stehen danach aber auf null.</value>
-  </data>
-  <data name="Explorer.ShowIcons" xml:space="preserve">
-    <value>Explorer-Symbole</value>
   </data>
   <data name="StartPage.CurrentDataModel" xml:space="preserve">
     <value>Aktuelles Datenmodell:</value>

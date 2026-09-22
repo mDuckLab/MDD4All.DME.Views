@@ -16,15 +16,14 @@
             <EditorMainToolbar />
         </div>
 
-        <TreeDisplayToggle @bind-Active="ExplorerSettings.ShowIcons"
-                           Label="@L["Explorer.ShowIcons"]" />
+        <div class="toolbar-right">
+            <EditorDepthStepperView @bind-Value="EditorSettings.MaxDepth" Limit="Editor.MaxSelectableDepth"
+                                    Label="@L["Editor.VisibleDepth"]" />
 
-        <EditorDepthStepperView @bind-Value="EditorSettings.MaxDepth" Limit="Editor.MaxSelectableDepth"
-                                Label="@L["Editor.VisibleDepth"]" />
-
-        <button class="wb-btn-reset" title="@L["Tooltip.Settings"]" type="button" @onclick="@(() => Navigation.OpenSettings())">
-            <i class="bi bi-gear-fill"></i>
-        </button>
+            <button class="wb-btn-reset" title="@L["Tooltip.Settings"]" type="button" @onclick="@(() => Navigation.OpenSettings())">
+                <i class="bi bi-gear-fill"></i>
+            </button>
+        </div>
     </header>
 
     @* --- BREADCRUMB AREA --- *@
