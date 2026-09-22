@@ -61,6 +61,35 @@
     background-position: right 0.25rem center; /* 4px */
 }
 
+/* Chromium draws the drop-down list outside the page, in its own gray chrome - unless the
+   select is switched to the customizable rendering. Then the list is ours to paint. */
+select.form-select {
+    appearance: base-select;
+}
+
+select.form-select::picker(select) {
+    appearance: base-select;
+    background: #ffffff;
+    border: 1px solid var(--accent-color);
+    border-radius: 0.1875rem;
+    padding: 2px;
+}
+
+select.form-select option {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.85rem;
+}
+
+/* The tick in front of the picked entry costs a whole column; the highlight says it already. */
+select.form-select option::checkmark {
+    display: none;
+}
+
+select.form-select option:hover,
+select.form-select option:checked {
+    background: var(--hover-blue);
+}
+
 .property-row.readonly {
     opacity: 0.55;
 }
