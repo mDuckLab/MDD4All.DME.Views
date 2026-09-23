@@ -50,6 +50,18 @@
         @L["StartPage.EditDataFileSub"]
     </div>
     <div class="dataFileCommands">
+        @if (CanReturnToEditor)
+        {
+            <div class="commandLink"
+                 @onclick="() => OnEditorRequested.InvokeAsync()">
+                @L["StartPage.BackToEditor"]
+                @if (DataFile.CurrentFilePath != "")
+                {
+                    <span class="openFileName">@System.IO.Path.GetFileName(DataFile.CurrentFilePath)</span>
+                }
+            </div>
+        }
+
         <div class="commandLink"
              @onclick="() => DataFile.NewDataFileCommand.Execute(null)">@L["StartPage.CreateNewFile"]</div>
 

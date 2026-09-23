@@ -92,3 +92,10 @@
 .currentDataModelTitle {
     font-weight: bold;
 }
+
+/* The file behind the way back, quieter than the link itself. */
+.openFileName {
+    color: #666;
+    font-size: 0.85em;
+    margin-left: 0.4rem;
+}

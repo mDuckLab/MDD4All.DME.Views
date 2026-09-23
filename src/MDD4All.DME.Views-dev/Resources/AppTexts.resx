@@ -205,6 +205,9 @@
   <data name="StartPage.CreateNewFile" xml:space="preserve">
     <value>Create a new file</value>
   </data>
+  <data name="StartPage.BackToEditor" xml:space="preserve">
+    <value>Back to the open file</value>
+  </data>
   <data name="StartPage.OpenExistingFile" xml:space="preserve">
     <value>Open an existing file</value>
   </data>
@@ -213,6 +216,18 @@
   </data>
   <data name="Dialog.DataWillBeLost" xml:space="preserve">
     <value>Data will be lost</value>
+  </data>
+  <data name="Dialog.UnsavedChanges" xml:space="preserve">
+    <value>Unsaved changes</value>
+  </data>
+  <data name="Dialog.UnsavedChangesText" xml:space="preserve">
+    <value>This document has changes that were never written to disk. Without saving, they are lost.</value>
+  </data>
+  <data name="Dialog.SaveFirst" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Dialog.DiscardChanges" xml:space="preserve">
+    <value>Discard</value>
   </data>
   <data name="Dialog.SaveAnyway" xml:space="preserve">
     <value>Save anyway</value>

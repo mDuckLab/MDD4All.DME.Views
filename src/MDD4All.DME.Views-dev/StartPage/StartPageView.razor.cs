@@ -1,4 +1,4 @@
-using MDD4All.DME.ViewModels.DataManager;
+﻿using MDD4All.DME.ViewModels.DataManager;
 using Microsoft.AspNetCore.Components;
 
 namespace MDD4All.DME.Views.StartPage
@@ -16,5 +16,11 @@ namespace MDD4All.DME.Views.StartPage
 
         [Parameter]
         public EventCallback OnSettingsRequested { get; set; }
+
+        [Parameter]
+        public bool CanReturnToEditor { get; set; }
+
+        [Parameter]
+        public EventCallback OnEditorRequested { get; set; }
     }
 }

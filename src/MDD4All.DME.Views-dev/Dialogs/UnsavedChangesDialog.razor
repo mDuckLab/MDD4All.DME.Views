@@ -1,0 +1,12 @@
+@namespace MDD4All.DME.Views.Dialogs
+@using MDD4All.UI.BlazorComponents.Dialog
+@inherits MDD4All.DME.Views.Localization.LocalizedComponent
+<ModalDialog DialogType="ModalDialog.ModalDialogType.SaveDiscardCancel"
+             ConfirmText="@L["Dialog.SaveFirst"]"
+             DiscardText="@L["Dialog.DiscardChanges"]"
+             Title="@L["Dialog.UnsavedChanges"]"
+             OnResult="OnDialogResult">
+    <div>
+        <p>@L["Dialog.UnsavedChangesText"]</p>
+    </div>
+</ModalDialog>
