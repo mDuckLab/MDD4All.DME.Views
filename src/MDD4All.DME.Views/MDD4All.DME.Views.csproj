@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MDD4All.DME.ViewModels\src\MDD4All.DME.ViewModels-dev\MDD4All.DME.ViewModels-dev.csproj" />
+    <ProjectReference Include="..\..\..\MDD4All.DME.ViewModels\src\MDD4All.DME.ViewModels\MDD4All.DME.ViewModels-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.DME.AssemblyTree\src\MDD4All.DME.AssemblyTree\MDD4All.DME.AssemblyTree-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.UI.Blazor\src\MDD4All.UI.Blazor\MDD4All.UI.Blazor-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.UI.BlazorComponents\src\MDD4All.UI.BlazorComponents\MDD4All.UI.BlazorComponents-dev.csproj" />
