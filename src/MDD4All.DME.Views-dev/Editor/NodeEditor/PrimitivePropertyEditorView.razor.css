@@ -65,6 +65,28 @@
    select is switched to the customizable rendering. Then the list is ours to paint. */
 select.form-select {
     appearance: base-select;
+    /* In this mode the select is a button of its own: the picked text and Chromium's arrow.
+       Bootstrap's painted arrow would be a second one, and a fixed row height has no room for
+       the two lines they end up on. */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-image: none;
+    padding: 0.125rem 0.375rem;
+    overflow: hidden;
+}
+
+select.form-select::selectedcontent {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+select.form-select::picker-icon {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    color: #333;
 }
 
 select.form-select::picker(select) {
