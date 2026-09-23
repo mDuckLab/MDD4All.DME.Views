@@ -112,6 +112,18 @@
   <data name="Tooltip.DeleteInstance" xml:space="preserve">
     <value>Delete instance</value>
   </data>
+  <data name="Tooltip.MoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="Tooltip.MoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="Tooltip.EnableMoveMode" xml:space="preserve">
+    <value>Turn reordering on</value>
+  </data>
+  <data name="Tooltip.DisableMoveMode" xml:space="preserve">
+    <value>Turn reordering off</value>
+  </data>
   <data name="Tooltip.DeleteEntry" xml:space="preserve">
     <value>Delete entry</value>
   </data>

@@ -82,6 +82,10 @@ namespace MDD4All.DME.Views.Editor
             {
                 ViewModel.EditorState.IsDeleteMode = !ViewModel.EditorState.IsDeleteMode;
             }
+            else if (action == EditorAction.ToggleMoveMode)
+            {
+                ViewModel.EditorState.IsMoveMode = !ViewModel.EditorState.IsMoveMode;
+            }
             else if (action == EditorAction.Select)
             {
                 // Select node in tree if available

@@ -66,6 +66,13 @@
                            OnActionTriggered="@(() => Notify(EditorAction.Add))"
                            Tooltip="@L["Tooltip.AddElement"]" />
             }
+            @if (DataContext.EditorState.ShowMoveModeButton)
+            {
+                <ToolbarButton Action="ToolbarButton.ToolbarAction.MoveMode"
+                           IsActive="@DataContext.EditorState.IsMoveMode"
+                           OnActionTriggered="@(() => Notify(EditorAction.ToggleMoveMode))"
+                           Tooltip="@(DataContext.EditorState.IsMoveMode ? L["Tooltip.DisableMoveMode"] : L["Tooltip.EnableMoveMode"])" />
+            }
             @if (DataContext.EditorState.ShowDeleteModeButton)
             {
                 <ToolbarButton Action="ToolbarButton.ToolbarAction.DeleteMode"

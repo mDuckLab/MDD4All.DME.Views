@@ -112,6 +112,18 @@
   <data name="Tooltip.DeleteInstance" xml:space="preserve">
     <value>Instanz löschen</value>
   </data>
+  <data name="Tooltip.MoveUp" xml:space="preserve">
+    <value>Nach oben</value>
+  </data>
+  <data name="Tooltip.MoveDown" xml:space="preserve">
+    <value>Nach unten</value>
+  </data>
+  <data name="Tooltip.EnableMoveMode" xml:space="preserve">
+    <value>Umsortieren einschalten</value>
+  </data>
+  <data name="Tooltip.DisableMoveMode" xml:space="preserve">
+    <value>Umsortieren ausschalten</value>
+  </data>
   <data name="Tooltip.DeleteEntry" xml:space="preserve">
     <value>Eintrag löschen</value>
   </data>

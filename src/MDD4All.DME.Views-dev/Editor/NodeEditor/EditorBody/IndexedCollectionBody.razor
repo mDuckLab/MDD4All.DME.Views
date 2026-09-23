@@ -4,16 +4,34 @@
 @inherits MDD4All.DME.Views.Localization.LocalizedComponent
 
 @{
-    // How many rows do three columns need?
-    // Five rows is the minimum we start from.
+    // Up to five entries run down a single column across the full width. Only a longer list
+    // breaks into a second and a third one, rather than growing ever taller.
     int childCount = ViewModel.Children?.Count ?? 0;
-    int requiredRows = (int)Math.Ceiling(childCount / 3.0);
-    int maxRows = Math.Max(5, requiredRows);
+
+    int columns = (int)Math.Ceiling(childCount / 5.0);
+    if (columns < 1) { columns = 1; }
+    if (columns > 3) { columns = 3; }
+
+    int maxRows = (int)Math.Ceiling(childCount / (double)columns);
+    if (maxRows < 1) { maxRows = 1; }
+
+    // Stacked arrows, the same pair for a plain line and for a card.
+    RenderFragment<ObjectEditorViewModel> moveButtons = child =>
+    @<div class="move-action-area">
+        <ToolbarButton Action="ToolbarButton.ToolbarAction.MoveUp"
+                       Disabled="@IsFirst(child)"
+                       OnActionTriggered="() => OnMoveChild(child, true)"
+                       Tooltip="@L["Tooltip.MoveUp"]" />
+        <ToolbarButton Action="ToolbarButton.ToolbarAction.MoveDown"
+                       Disabled="@IsLast(child)"
+                       OnActionTriggered="() => OnMoveChild(child, false)"
+                       Tooltip="@L["Tooltip.MoveDown"]" />
+    </div>;
 }
 
 <div class="indexed-body-container @(ViewModel.IsUnderlyingTypeSimple ? "vertical-column-flow" : "stack-mode-complex")
-     @(childCount >= 5 ? "show-dividers" : "")"
-     style="--max-rows: @maxRows;">
+     @(columns > 1 ? "show-dividers" : "")"
+     style="--max-rows: @maxRows; --columns: @columns;">
 
     @if (ViewModel.Children != null)
     {
@@ -30,13 +48,18 @@
                 @if (ViewModel.IsUnderlyingTypeSimple)
                 {
                     <div class="simple-line-item">
-                        <div class="delete-action-area">
-                            @if (ViewModel.EditorState.IsDeleteMode)
-                            {
+                        @if (ViewModel.EditorState.IsDeleteMode)
+                        {
+                            <div class="delete-action-area">
                                 <ToolbarButton Action="ToolbarButton.ToolbarAction.DeleteChild"
                                 OnActionTriggered="() => OnDeleteChild(childVm)" />
-                            }
-                        </div>
+                            </div>
+                        }
+
+                        @if (ViewModel.EditorState.IsMoveMode)
+                        {
+                            @moveButtons(childVm)
+                        }
 
                         <ObjectEditorView ViewModel="@childVm"
                         MaxDepth="@MaxDepth"
@@ -46,6 +69,11 @@
                 else
                 {
                     <div class="complex-wrapper">
+                        @if (ViewModel.EditorState.IsMoveMode)
+                        {
+                            @moveButtons(childVm)
+                        }
+
                         <ObjectEditorView ViewModel="@childVm"
                         MaxDepth="@MaxDepth"
                         CurrentDepth="@CurrentDepth" />

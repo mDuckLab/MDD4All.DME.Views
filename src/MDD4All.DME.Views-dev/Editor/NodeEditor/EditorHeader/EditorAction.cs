@@ -5,6 +5,7 @@
         ToggleExpand,
         Select,
         ToggleDeleteMode,
+        ToggleMoveMode,
         Create,
         Delete,
         Add

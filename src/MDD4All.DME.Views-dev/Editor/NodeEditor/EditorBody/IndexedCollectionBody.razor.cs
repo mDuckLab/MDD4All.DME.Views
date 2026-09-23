@@ -17,23 +17,55 @@ namespace MDD4All.DME.Views.Editor
 
         [Parameter] public bool IsCompact { get; set; } = false;
 
+        // A child carries its place in the collection with it; ListAccess and ArrayAccess are
+        // both an IndexedAccess.
+        private static int IndexOf(ObjectEditorViewModel childVm)
+        {
+            int result = -1;
+
+            if (childVm.Access is IndexedAccess indexedAccess)
+            {
+                result = indexedAccess.Index;
+            }
+
+            return result;
+        }
+
+        private bool IsFirst(ObjectEditorViewModel childVm)
+        {
+            return IndexOf(childVm) <= 0;
+        }
+
+        private bool IsLast(ObjectEditorViewModel childVm)
+        {
+            return IndexOf(childVm) >= ViewModel.Children.Count - 1;
+        }
+
         private void OnDeleteChild(ObjectEditorViewModel childVm)
         {
-            int index = -1;
-
-            if (childVm.Access is ListAccess listAccess)
-            {
-                index = listAccess.Index;
-            }
-            else if (childVm.Access is ArrayAccess arrayAccess)
-            {
-                index = arrayAccess.Index;
-            }
+            int index = IndexOf(childVm);
 
             // Run the delete command once a valid index was found
             if (index != -1 && ViewModel.DeleteAtIndexCommand.CanExecute(index))
             {
                 ViewModel.DeleteAtIndexCommand.Execute(index);
+            }
+        }
+
+        private void OnMoveChild(ObjectEditorViewModel childVm, bool moveUp)
+        {
+            int index = IndexOf(childVm);
+
+            if (index != -1)
+            {
+                if (moveUp)
+                {
+                    ViewModel.MoveItemUpCommand.Execute(index);
+                }
+                else
+                {
+                    ViewModel.MoveItemDownCommand.Execute(index);
+                }
             }
         }
     }
