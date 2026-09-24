@@ -6,6 +6,40 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- What the listing on a package feed shows. The version is only a fallback: the
+       build hands in the real one, read from src/version.txt plus the run number. -->
+  <PropertyGroup>
+    <Version>2.0.0.0</Version>
+    <Authors>mDuckLab</Authors>
+    <Company>MDD4All.de</Company>
+    <Copyright>(c) 2026 mDuckLab</Copyright>
+    <Description>The Blazor components of MDD4All.DME, the object graph editor: a card per object, a shape of its own for lists, arrays and dictionaries, the start page, the settings dialog, and every text in two languages.</Description>
+    <PackageTags>Blazor Editor ObjectGraph UI Components</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>Nuget.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <!-- Where the package came from, and what a debugger needs to step into this code from
+       a project that only has the package. The repository address is not written out: it is
+       read from the git remote while packing, so moving the repository changes nothing here. -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
@@ -15,11 +49,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MDD4All.Reflection.TypeAnalyzer" Version="2.0.0.7" />
+  </ItemGroup>
+
+  <!-- Waiting on a package. None of these is published yet, so no package can be built
+       from here until they are:
+         MDD4All.DME.ViewModels
+         MDD4All.DME.AssemblyTree
+         MDD4All.UI.Blazor
+         MDD4All.UI.BlazorComponents  -  published by oalt, but without the changes here -->
+  <ItemGroup>
     <ProjectReference Include="..\..\..\MDD4All.DME.ViewModels\src\MDD4All.DME.ViewModels\MDD4All.DME.ViewModels-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.DME.AssemblyTree\src\MDD4All.DME.AssemblyTree\MDD4All.DME.AssemblyTree-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.UI.Blazor\src\MDD4All.UI.Blazor\MDD4All.UI.Blazor-dev.csproj" />
     <ProjectReference Include="..\..\..\MDD4All.UI.BlazorComponents\src\MDD4All.UI.BlazorComponents\MDD4All.UI.BlazorComponents-dev.csproj" />
-    <ProjectReference Include="..\..\..\MDD4All.Reflection.TypeAnalyzer\src\MDD4All.Reflection.TypeAnalyzer\MDD4All.Reflection.TypeAnalyzer-dev.csproj" />
   </ItemGroup>
-
 </Project>
